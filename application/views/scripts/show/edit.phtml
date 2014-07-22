@@ -1,0 +1,26 @@
+<?php
+
+
+
+echo '<form class="login" style="float:left" id ="single" enctype="multipart/form-data"  method="post" action="/show/update">';
+echo '<a href="/show/index">back</a>';
+$fetch = $this->fetch;
+echo "<input name='id' value = " . $fetch['id'] . " hidden><br />";
+
+echo "<input name='id_group' value = " . $fetch['id_group'] . " required autofocus><br />";
+echo '<input name="Login" value = ' . $fetch['Login'] . ' required><br />';
+echo '<input name="Password" value = ' . $fetch['Password'] . ' required><br />';
+echo '<input name="Email" value = ' . $fetch['Email'] . ' required ><br />';
+echo '<input name="account_expired" value = ' . $fetch['account_expired'] . ' required ><br />';
+echo '<input name="avatar_extension" type="file"   required><br />';
+
+echo '<button type="submit"  > Update</button>';
+
+echo ' </form>';
+
+$or = $fetch['avatar_extension'];
+echo " <div id='img' style='float:left'><img  width='400px' heigth='400px' src=/upload/consumer_avatar/$or></div>";
+
+
+
+

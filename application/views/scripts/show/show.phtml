@@ -1,0 +1,70 @@
+
+<?php
+
+$fetch = $this->fetch;
+
+
+/*
+ * сортировка абонентов
+ */
+
+echo '<table>';
+echo "<th ><form  method = 'post' action = '/show/Asc/by/id_group'><input class='cellbut' type='submit' value ='id_group'></form>  </th>";
+echo "<th><form  method = 'post' action = '/show/Asc/by/Login'><input class='cellbut' type='submit' value ='Login'></form></th>";
+echo "<th> <form  method = 'post' action = '/show/Asc/by/Password'><input class='cellbut' type='submit' value ='Password'></form>   </th>";
+echo "<th><form  method = 'post' action = '/show/Asc/by/Email'><input class='cellbut' type='submit' value ='Email'></form>  </th>";
+echo "<th><form  method = 'post' action = '/show/Asc/by/account_expired'><input class='cellbut' type='submit' value ='account_expired'></form>  </th>";
+echo "<th><form  method = 'post' action = '/show/Asc/by/avatar_extension'><input class='cellbut' type='submit' value ='avatar_extension'></form>  </th>";
+echo "<th><form  method = 'post' action = '/show/show'><input class='cellbut' type='submit' value ='menu'></form>  </th>";
+
+/*
+ * выборка абонентов
+ */
+echo '<tr>';
+echo '<form  method = "post" action = "/show/sort">';
+echo "<td><input border:0px type='text' name ='id_group'   placeholder='filtering by...'       ></td>";
+echo "<td><input type='text' name ='Login'placeholder='filtering by...'             ></td>";
+echo "<td><input type='text' name ='Password'placeholder='filtering by...'          ></td>";
+echo "<td><input type='text' name ='Email'   placeholder='filtering by...'          ></td>";
+echo "<td><input type='text' name ='account_expired' placeholder='filtering by...'  ></td>";
+echo "<td><input type='text' name ='avatar_extension' placeholder='filtering by...' ></td>";
+echo "<td><button id='sort' type='submit'  >find</button></td>";
+
+echo '</form>';
+echo '</tr>';
+/*
+ * добавление нового абонента
+ */
+echo '<form   action="/show/add" enctype="multipart/form-data" method="post">
+  <td>  <input  name="id_group" list type="text" placeholder="select id_group"  required></td>
+  <td>  <input name="Login" placeholder="insert Login "    required ></td>
+  <td>  <input name="Password" placeholder="insert Password"  type="password"   required></td>
+  <td>  <input name="Email" placeholder="insert Email"  type="text"  required></td>
+  <td>   <input name="account_expired" placeholder="insert data"  type="text"   ></td>
+  <td>  <input name="avatar_extension"  type="file"   required>  </td>
+   <td>     <button id="add">Add</button></td>
+</form>';
+
+
+/*
+ * вывод всех абонентов
+ */
+if (!empty($fetch)) {
+    for ($i = 0; $i < count($fetch); $i++) {
+        echo '<tr id="td_result">';
+        echo "<td>" . $fetch[$i]['id_group'] . "</td>";
+        echo "<td>" . $fetch[$i]['Login'] . "</td>";
+        echo "<td>" . $fetch[$i]['Password'] . "</td>";
+        echo "<td>" . $fetch[$i]['Email'] . "</td>";
+        echo "<td>" . $fetch[$i]['account_expired'] . "</td>";
+        echo "<td>" . $fetch[$i]['avatar_extension'] . "</td>";
+        $url = '/show/del/id/' . $fetch[$i]['id'];
+        echo "<td><form  method = 'post' action = '$url'><button class='edit_del'>delete</button></form></td>";
+        $url2 = '/show/edit/id/' . $fetch[$i]['id'];
+        echo "<td><form  method = 'post' action = '$url2'><button class='edit_del'>edit</button></form></td>";
+        echo "</tr>";
+    }
+}
+
+
+echo '</table>';
